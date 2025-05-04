@@ -2,9 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chroma Shift Interactive - Home</title>
+    <meta name="description" content="Welcome to Chroma Shift Interactive, an innovative game development studio.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans antialiased">
+
+<header class="bg-gray-900 text-white shadow-md">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">
+            <a href="index.html" class="hover:text-blue-400 transition duration-300">Chroma Shift Interactive</a>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="index.html" class="hover:text-blue-400 transition duration-300">Home</a></li>
+            <li><a href="#about" class="hover:text-blue-400 transition duration-300">About</a></li>
+            <li><a href="#games" class="hover:text-blue-400 transition duration-300">Games</a></li>
+            <li><a href="#contact" class="hover:text-blue-400 transition duration-300">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-12">
+
+    <section class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Welcome to Chroma Shift Interactive</h1>
+        <p class="text-lg text-gray-600 mb-8">Crafting unique and engaging gaming experiences.</p>
+        <button id="cta-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
+            Learn More
+        </button>
+    </section>
+
+    <section id="about" class="mb-16 scroll-mt-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">About Us</h2>
+        <p class="text-gray-700 text-center max-w-2xl mx-auto">
+            We are a passionate team dedicated to pushing the boundaries of interactive entertainment. (Replace this with your actual studio description).
+        </p>
+    </section>
+
+    <section id="games" class="mb-16 scroll-mt-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Our Games</h2>
+        <p class="text-gray-700 text-center max-w-2xl mx-auto">
+            Details about your amazing games will go here soon!
+        </p>
+    </section>
+
+    <section id="contact" class="mb-16 scroll-mt-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Get In Touch</h2>
+        <p class="text-gray-700 text-center max-w-2xl mx-auto">
+            Contact form or details will be added here.
+        </p>
+    </section>
+
+</main>
+
+<footer class="bg-gray-800 text-gray-400 py-8 mt-16">
+    <div class="container mx-auto px-6 text-center">
+        <p>&copy; <span id="current-year"></span> Chroma Shift Interactive. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
