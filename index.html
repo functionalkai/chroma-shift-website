@@ -4,64 +4,504 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chroma Shift Interactive - Home</title>
-    <meta name="description" content="Welcome to Chroma Shift Interactive, an innovative game development studio.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Chroma Shift Interactive: Crafting deep, immersive RPG and simulation experiences like Odyssey, Blackout, and other upcoming titles.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-</head>
-<body class="bg-gray-100 text-gray-800 font-sans antialiased">
+    <style>
+        /* CSS Variables for Colors and Fonts */
+        :root {
+            --bg-default: #2f2e2b;
+            --bg-alt: #3a3936;
+            --bg-dark: #252422;
+            --text-default: #ffffff;
+            --text-medium: #e5e7eb;
+            --text-light: #d1d5db;
+            --text-dark: #9ca3af;
+            /* Updated Accent Colors to Warm Yellow */
+            --accent-default: #facc15; /* yellow-400 */
+            --accent-hover: #fde047;   /* yellow-300 */
+            --accent-dark: #eab308;    /* yellow-500 */
+            --dark-ui-default: #252422;
+            --dark-ui-medium: #1c1b1a;
+            --font-sans: 'Inter', sans-serif;
+        }
 
-<header class="bg-gray-900 text-white shadow-md">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-bold">
-            <a href="index.html" class="hover:text-blue-400 transition duration-300">Chroma Shift Interactive</a>
-        </div>
-        <ul class="flex space-x-6">
-            <li><a href="index.html" class="hover:text-blue-400 transition duration-300">Home</a></li>
-            <li><a href="#about" class="hover:text-blue-400 transition duration-300">About</a></li>
-            <li><a href="#games" class="hover:text-blue-400 transition duration-300">Games</a></li>
-            <li><a href="#contact" class="hover:text-blue-400 transition duration-300">Contact</a></li>
+        /* Basic Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
+            font-size: 16px; /* Base font size */
+            /* Apply scroll snapping to the whole page */
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            background-color: var(--bg-default);
+            color: var(--text-default);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700; /* Bold */
+            color: var(--text-default);
+            margin-bottom: 1rem;
+        }
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 3rem; }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1.5rem; }
+        h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); margin-bottom: 0.5rem;} /* For Team names */
+
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-medium);
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--accent-default);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover:not(.btn):not(.logo-link) {
+            color: var(--accent-hover);
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--text-default);
+        }
+
+        /* Container for centering content */
+        .container {
+            width: 90%;
+            max-width: 1152px; /* Equivalent to max-w-6xl */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(37, 36, 34, 0.9); /* var(--dark-ui-default) with opacity */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+        }
+
+        header nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .logo-placeholder {
+            height: 2rem; /* 32px */
+            width: auto;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .logo-placeholder img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        header nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            list-style: none;
+            gap: 1rem;
+        }
+        header nav ul a {
+            color: var(--text-light);
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        header nav ul a:hover {
+            color: var(--accent-default); /* Use new yellow accent */
+        }
+
+        /* Main Container - Contains all sections now */
+        main {
+            width: 100%;
+            flex-grow: 1; /* Allow main to take available space */
+        }
+
+        /* Scroll Snap Sections */
+        section.snap-section {
+            scroll-snap-align: start; /* Align sections to the top for snapping */
+            min-height: 100vh; /* Each snap section should fill the viewport */
+            padding: 4rem 0; /* Vertical padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        /* Alternating Backgrounds for Snap Sections */
+        /* Hero (1st) */
+        section#hero { background-color: var(--bg-dark); }
+        /* About (2nd) */
+        section#about { background-color: var(--bg-default); }
+        /* Games (3rd) */
+        section#games { background-color: var(--bg-dark); }
+        /* Team (4th) */
+        section#team { background-color: var(--bg-default); }
+        /* Contact (5th) */
+        section#contact { background-color: var(--bg-dark); }
+
+
+        /* Section Content Wrapper */
+        .section-content {
+            width: 100%;
+        }
+
+        /* Paragraphs within sections */
+        .section-paragraph {
+            max-width: 768px; /* max-w-3xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform-origin: center;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.4); /* Yellow focus ring */
+        }
+
+        .btn-accent {
+            background-color: var(--accent-default);
+            color: var(--bg-default); /* Dark text for contrast on yellow */
+            border-color: var(--accent-default);
+        }
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            border-color: var(--accent-default);
+            color: var(--accent-default);
+            background-color: transparent;
+        }
+        .btn-secondary:hover {
+            background-color: var(--accent-default);
+            color: var(--bg-default); /* Dark text on hover */
+        }
+
+        /* Game Section Specifics */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 768px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        @media (min-width: 768px) {
+            .game-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .game-card-featured {
+            background-color: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--text-light);
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+        @media (min-width: 768px) {
+            .game-card-featured {
+                display: flex;
+                align-items: center;
+                gap: 3rem;
+                padding: 3rem;
+            }
+            .game-card-featured .image-container {
+                width: 50%;
+                flex-shrink: 0;
+            }
+            .game-card-featured .text-container {
+                width: 50%;
+            }
+        }
+
+        .game-card {
+            background-color: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--text-light);
+            transition: box-shadow 0.3s ease;
+        }
+        .game-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(250, 204, 21, 0.1), 0 4px 6px -2px rgba(250, 204, 21, 0.05); /* Yellow shadow */
+        }
+        .game-card img, .game-card-featured img {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid var(--text-light);
+        }
+        .game-card h3, .game-card-featured h3 {
+            color: var(--accent-default); /* Use new yellow accent */
+        }
+        .game-card p, .game-card-featured p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .game-card-featured p {
+            font-size: 1.125rem;
+        }
+
+        /* Team Section Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 640px; /* Approx max-w-xl */
+            margin: 0 auto; /* Center grid */
+        }
+        @media (min-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        /* Team Member Card Styling */
+        .team-card {
+            background-color: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--text-light);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            text-align: center;
+        }
+        .team-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(250, 204, 21, 0.1), 0 4px 6px -2px rgba(250, 204, 21, 0.05); /* Yellow shadow */
+            transform: translateY(-5px); /* Slight lift on hover */
+        }
+        .team-card img {
+            width: 128px; /* w-32 */
+            height: 128px; /* h-32 */
+            border-radius: 9999px; /* rounded-full */
+            margin: 0 auto 1rem auto; /* Center image */
+            object-fit: cover;
+            border: 4px solid var(--text-light);
+        }
+        .team-card h4 { /* Name */
+            color: var(--text-default);
+            margin-bottom: 0.25rem;
+        }
+        .team-card p.role { /* Role */
+            color: var(--accent-default); /* Use new yellow accent */
+            font-weight: 500;
+            font-size: 1.1rem; /* Slightly larger role text */
+            margin-bottom: 0.75rem; /* Add space below role */
+        }
+        .team-card p.bio { /* Bio text */
+            color: var(--text-light); /* Lighter text for bio */
+            font-size: 0.95rem; /* Slightly smaller text for bio */
+            line-height: 1.5;
+            text-align: left; /* Align bio text left */
+            margin-bottom: 0;
+        }
+
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-ui-medium);
+            color: var(--text-dark);
+            padding: 2rem 0;
+            text-align: center;
+            /* Footer is now part of the body flow, no margin-top needed */
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav class="container">
+        <a href="#hero" class="logo-link">
+            <div class="logo-placeholder">
+                <img src="https://placehold.co/150x40/252422/facc15?text=Logo" alt="Chroma Shift Interactive Logo Placeholder">
+            </div>
+        </a>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 </header>
 
-<main class="container mx-auto px-6 py-12">
-
-    <section class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Welcome to Chroma Shift Interactive</h1>
-        <p class="text-lg text-gray-600 mb-8">Crafting unique and engaging gaming experiences.</p>
-        <button id="cta-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
-            Learn More
-        </button>
+<main>
+    <section id="hero" class="snap-section">
+        <div class="section-content">
+            <h1>Chroma Shift Interactive</h1>
+            <p class="section-paragraph" style="font-size: 1.25rem; margin-bottom: 2.5rem;">
+                Crafting deep, immersive RPGs where simulation meets player freedom.
+            </p>
+            <a href="#games" class="btn btn-accent">
+                Discover Our Games
+            </a>
+        </div>
     </section>
 
-    <section id="about" class="mb-16 scroll-mt-16">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">About Us</h2>
-        <p class="text-gray-700 text-center max-w-2xl mx-auto">
-            We are a passionate team dedicated to pushing the boundaries of interactive entertainment. (Replace this with your actual studio description).
-        </p>
+    <section id="about" class="snap-section">
+        <div class="section-content">
+            <h2>About Us</h2>
+            <p class="section-paragraph">
+                Chroma Shift Interactive is a passionate game development studio focused on creating unique and engaging single-player experiences. We specialize in blending deep life simulation mechanics with the player agency and emergent gameplay found in immersive sims. Our goal is to build worlds that feel alive, where player choices have meaningful consequences and managing fundamental needs is as crucial as exploration or combat.
+            </p>
+            <p class="section-paragraph">
+                Our debut title, <strong style="color: var(--accent-default);">Odyssey</strong>, embodies this philosophy, challenging players to survive and thrive on a detailed island home, navigating intricate social dynamics and environmental challenges within a rich RPG framework.
+            </p>
+        </div>
     </section>
 
-    <section id="games" class="mb-16 scroll-mt-16">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Our Games</h2>
-        <p class="text-gray-700 text-center max-w-2xl mx-auto">
-            Details about your amazing games will go here soon!
-        </p>
+    <section id="games" class="snap-section">
+        <div class="section-content">
+            <h2>Our Games</h2>
+
+            <div class="game-card-featured">
+                <div class="image-container">
+                    <img src="https://placehold.co/600x400/3a3936/ffffff?text=Odyssey+Concept"
+                         alt="Concept image for the game Odyssey"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/252422/e5e7eb?text=Image+Not+Found';">
+                </div>
+                <div class="text-container">
+                    <h3>Odyssey (In Development)</h3>
+                    <p>
+                        Embark on a single-player journey in <strong>Odyssey</strong>, an immersive RPG simulation set on your island home. More than just quests, it's about survival – manage needs like food, water, sleep, and warmth, which directly impact your abilities and interactions.
+                    </p>
+                    <p>
+                        Explore a reactive world, build relationships (or rivalries) through a dynamic reputation system, and define your path with a flexible skill system featuring archetypes like Warrior, Thief, Farmer, and more. Your choices shape your adventure in this emergent world of discovery.
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; color: var(--text-medium); font-size: 1.75rem; margin-bottom: 2.5rem;">Also In The Works...</h3>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://placehold.co/400x250/3a3936/ffffff?text=Blackout"
+                         alt="Placeholder image for Blackout"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x250/252422/e5e7eb?text=Concept';">
+                    <h3>Blackout (Working Title)</h3>
+                    <p>
+                        A Unity 2D stealth game inspired by Metal Gear. Infiltrate enemy bases, utilize shadows, and overcome challenging obstacles. (More details coming soon!)
+                    </p>
+                </div>
+                <div class="game-card">
+                    <img src="https://placehold.co/400x250/3a3936/ffffff?text=Upcoming"
+                         alt="Placeholder image for upcoming project"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x250/252422/e5e7eb?text=Concept';">
+                    <h3>Upcoming Project...</h3>
+                    <p>
+                        Stay tuned for details on our next exciting venture! We're always exploring new ideas and genres.
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="contact" class="mb-16 scroll-mt-16">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Get In Touch</h2>
-        <p class="text-gray-700 text-center max-w-2xl mx-auto">
-            Contact form or details will be added here.
-        </p>
+    <section id="team" class="snap-section">
+        <div class="container">
+            <h2 style="margin-bottom: 3rem;">Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://placehold.co/200x200/252422/facc15?text=KW"
+                         alt="Placeholder image for Kieran Wright"
+                         onerror="this.onerror=null; this.src='https://placehold.co/200x200/3a3936/e5e7eb?text=??';">
+                    <h4>Kieran Wright</h4>
+                    <p class="role">Lead Programmer</p>
+                    <p class="bio">
+                        A driven Software Engineer passionate about crafting immersive, systemic gameplay. Kieran explores the intersection of RPG depth, simulation, and player agency, using C++ and Unreal Engine to build engaging virtual worlds with dynamic AI, needs management, and emergent interactions.
+                    </p>
+                </div>
+                <div class="team-card">
+                    <img src="https://placehold.co/200x200/252422/facc15?text=CD"
+                         alt="Placeholder image for Chloe D."
+                         onerror="this.onerror=null; this.src='https://placehold.co/200x200/3a3936/e5e7eb?text=??';">
+                    <h4>Chloe D.</h4>
+                    <p class="role">Artist</p>
+                    <p class="bio">
+                        With a keen eye for atmosphere and style, Chloe brings the studio's worlds to life visually. She focuses on creating compelling environments and characters that enhance player immersion and effectively communicate the tone and feel of the gameplay experience.
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
 
-</main>
+    <section id="contact" class="snap-section">
+        <div class="section-content">
+            <h2>Get In Touch</h2>
+            <p class="section-paragraph" style="margin-bottom: 2.5rem;">
+                Have questions, feedback, or interested in collaborating? We'd love to hear from you!
+            </p>
+            <div style="text-align: center;">
+                <a href="mailto:kieran.wrightcode@gmail.com?subject=Inquiry%20from%20Website&body=Hello%20Chroma%20Shift%20Team%2C%0A%0AI%20would%20like%20to...%0A%0ARegards%2C%0A[Your%20Name]"
+                   class="btn btn-secondary">
+                    Email Us!
+                </a>
+            </div>
+        </div>
+    </section>
 
-<footer class="bg-gray-800 text-gray-400 py-8 mt-16">
-    <div class="container mx-auto px-6 text-center">
-        <p>&copy; <span id="current-year"></span> Chroma Shift Interactive. All Rights Reserved.</p>
+</main> <footer>
+    <div class="container">
+        <p>&copy; <span id="current-year">2025</span> Chroma Shift Interactive. All Rights Reserved.</p>
     </div>
 </footer>
 
